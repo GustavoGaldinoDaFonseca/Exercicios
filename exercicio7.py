@@ -2,73 +2,92 @@ import json
 import os
 
 db_clientes = "db_clientes.json"
-#clientes = []
-
+# clientes = []
 def carregar_dados():
     if os.path.exists(db_clientes):
-        with open(db_clientes, "r", encondig="utf-8") as arq_json:
+        with open(db_clientes, "r", encoding="utf-8") as arq_json:
             return json.load(arq_json)
     else:
-        return []    
+        return[]
 
+clientes = carregar_dados()
+print(clientes)
 
-def obeter_dados_clientes():
-    nome_ = input("INFORME O NOME COMPLETO PARA O CADASTRO: ")
-    cpf = int(input("INFORME O CPF PARA O CADASTRO: "))
-    rg = int (input("INFORME O RG PARA O CADASTRO: "))
-    data_nascimento = input("INFORME A DATA DE NASCIMENTO PARA O CADASTRO (DD/MM/AAAA): ")
-    endereco = input("INFORME O ENDEREÇO PARA O CADASTRO: ")
-    cidade = input("INFORME A CIDADE PARA O CADASTRO: ")
-    estado = input("INFORME O ESTADO PARA O CADASTRO: ")
-    telefone = input("INFORME O TELEFONE PARA O CADASTRO: ")
-    celular = input("INFORME O CELULAR PARA O CADASTRO: ")
-    email_cadastro = input("INFORME O EMAIL PARA O CADASTRO: ")
+def obter_dados_clientes():
+    
+    nome_cliente = input("Informe o nome do cliente: ")
+    nascimento_cliente = int(input("Informe a data de nascimento do cliente: "))
+    email_cliente = input("Informe o email do cliente: ")
+    rg_cliente = float(input("Informe o rg do cliente: "))
+    cpf_cliente = float(input("Informe o cpf do cliente: "))
+    estado_cliente = input("Informe o estado do cliente: ")
+    cidade_cliente = input("Informe a cidade do cliente: ")
+    telefone_cliente = int(input("Informe o número de telefone do cliente: "))
 
-    return adicionar_cadastro(nome_, cpf, rg, data_nascimento, endereco, cidade, estado, telefone, celular, email_cadastro)
+    cliente = {
+        "nome_cliente": nome_cliente,
+        "nascimento_cliente": nascimento_cliente,
+        "email_cliente": email_cliente,
+        "rg_cliente": rg_cliente,
+        "cpf_cliente": cpf_cliente,
+        "estado_cliente": estado_cliente,
+        "cidade_cliente": cidade_cliente,
+        "telefone_cliente": telefone_cliente
 
-def adicionar_cadastro(nome, cpf, rg, data_nascimento, endereco, cidade, estado, telefone, celular, email):
-
-    cadastro = {
-        "nome": nome,
-        "cpf": cpf,
-        "rg": rg,
-        "data_nascimento": data_nascimento,
-        "endereco": endereco,
-        "cidade": cidade,
-        "estado": estado,
-        "telefone": telefone,
-        "celular": celular,
-        "email": email
     }
-    cadastros.append(cadastro)
 
-    return cadastros
+    return cliente
 
-def mostrar_dados_cadastros(dados_cadastros):
-    for cadastro in dados_cadastros:
-        print(f"Nome: {cadastro['nome']} | CPF: {cadastro['cpf']} | RG: {cadastro['rg']} | Data de Nascimento: {cadastro['data_nascimento']} | Endereço: {cadastro['endereco']} | Cidade: {cadastro['cidade']} | Estado: {cadastro['estado']} | Telefone: {cadastro['telefone']} | Celular: {cadastro['celular']} | Email: {cadastro['email']}")
-    return
+def cadastrar_cliente(dados_cliente):
+    clientes.append(dados_cliente)
 
+    return clientes
+
+def mostrar_dados_clientes(dados_cliente):
+    for cliente in dados_cliente:
+        print(f"""
+              Nome Do Cliente: {cliente["nome_cliente"]})
+              Nascimento Do Cliente: {cliente["nascimento_cliente"]}")
+              Email Do Cliente: {cliente["email_cliente"]}")
+              Rg Do Cliente: {cliente["rg_cliente"]}")
+              Cpf Do Cliente: {cliente["cpf_cliente"]}")
+              Estado Do Cliente: {cliente["estado_cliente"]}")
+              Cidade Do Cliente: {cliente["cidade_cliente"]}")
+              Telefone Do Cliente: {cliente["telefone_cliente"]}
+""")
+        
 def iniciar_sistema():
     while True:
+        print("")
         print("="*80)
-        print("Opção 1 => Mostrar Lista Para cadastros cadastrados.")
-        print("Opção 2 => Cadastrar novo cadastro.")
-        print("Opção 3 => Sair Para o Sistema.")
+        print("Opção 1 - Mostrar Lista de Clientes")
+        print("Opção 2 - Cadastrar Clientes")
+        print("Opção 3 - Sair do Sistema")
         print("="*80)
-       
-        opcao = input("ESCOLHA UMA DAS OPÇÕES ACIMA: ")
+
+        opcao = input("Escolha uma das opções do menu: ")
 
         if opcao == "1":
-            mostrar_dados_cadastros(cadastros)
+            mostrar_dados_clientes(clientes)
         elif opcao == "2":
-            obter_dados_cadastro()
-        else:
-            print("Sistema finalizado")
+            cadastrar_cliente(obter_dados_clientes())
+        elif opcao == "3":
+            print("Sistema finalizado!")
             break
-       
+        else:
+            print("Opção Invalida, escolha uma das opções do menu.")
 
-iniciar_sistema()
+
+
+
+
+
+
+
+
+
+
+
 
 
 
